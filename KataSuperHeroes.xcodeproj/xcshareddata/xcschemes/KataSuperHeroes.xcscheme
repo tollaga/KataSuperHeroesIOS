@@ -33,6 +33,16 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EBC230841C45016A007D5068"
+               BuildableName = "KataSuperHeroesUITests.xctest"
+               BlueprintName = "KataSuperHeroesUITests"
+               ReferencedContainer = "container:KataSuperHeroes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "82BE75E6232A819A0026059D"
                BuildableName = "KataSuperHeroesTests.xctest"
                BlueprintName = "KataSuperHeroesTests"
                ReferencedContainer = "container:KataSuperHeroes.xcodeproj">

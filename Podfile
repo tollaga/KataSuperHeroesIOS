@@ -5,8 +5,12 @@ target 'KataSuperHeroes' do
     pod 'SDWebImage'
 end
 
-target 'KataSuperHeroesTests' do
+target 'KataSuperHeroesUITests' do
     pod 'Nimble'
     pod 'KIF', :configurations => ['Debug']
+end
+
+target 'KataSuperHeroesTests' do
+  pod 'Nimble'
 end
 
