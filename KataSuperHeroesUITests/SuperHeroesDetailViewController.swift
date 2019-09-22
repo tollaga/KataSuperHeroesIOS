@@ -14,9 +14,9 @@ import UIKit
 
 class SuperHeroesDetailViewControllerTests: AcceptanceTestCase {
     
-    fileprivate let repository = MockSuperHeroesRepository()
+    fileprivate let repository = InMemorySuperHeroesRepository()
 
-    func testShowsSuperHeroNameAsTitle() {
+    func test_title_givenASuperHeroWithName_shouldShowsSuperHeroNameAsTitle() {
         let superHero = givenASuperHeroWithName()
         
         openSuperHeroDetailViewController(superHero.name)
@@ -24,47 +24,29 @@ class SuperHeroesDetailViewControllerTests: AcceptanceTestCase {
         tester().waitForView(withAccessibilityLabel: superHero.name)
     }
     
-    func testShowsSuperHeroUser() {
+    func test_userLabel_givenASuperHero_shouldShowsSuperHeroUserWithContent() {
         let superHero = givenASuperHeroWithName()
         
         openSuperHeroDetailViewController(superHero.name)
         
         let userLabel = tester().waitForView(withAccessibilityLabel: "Name: \(superHero.name)") as? UILabel
-        
-        expect(userLabel?.isHidden).to(beFalse())
-    }
 
-    func testShowsSuperHeroUserWithContent() {
-        let superHero = givenASuperHeroWithName()
-        
-        openSuperHeroDetailViewController(superHero.name)
-        
-        let userLabel = tester().waitForView(withAccessibilityLabel: "Name: \(superHero.name)") as? UILabel
-        
+        expect(userLabel?.isHidden).to(beFalse())
         expect(userLabel?.text).to(equal(superHero.name))
     }
-
-    func testShowsSuperHeroDescription() {
-        let superHero = givenASuperHeroWithName()
-        
-        openSuperHeroDetailViewController(superHero.name)
-
-        let descriptionLabel = tester().waitForView(withAccessibilityLabel: "Description: \(superHero.name)") as? UILabel
-        
-        expect(descriptionLabel?.isHidden).to(beFalse())
-    }
     
-    func testShowsSuperHeroDescriptionWithContent() {
+    func test_descriptonLabel_giverASuperHero_shouldShowsSuperHeroDescriptionWithContent() {
         let superHero = givenASuperHeroWithName()
         
         openSuperHeroDetailViewController(superHero.name)
         
         let descriptionLabel = tester().waitForView(withAccessibilityLabel: "Description: \(superHero.name)") as? UILabel
-        
+
+        expect(descriptionLabel?.isHidden).to(beFalse())
         expect(descriptionLabel?.text).to(equal(superHero.description))
     }
     
-    func testShowSuperHeroImageIfThereIsSuperHero() {
+    func test_photoImageView_giverASuperHero_shouldShowSuperHeroImage() {
         let image = try? UIImage(data: Data(contentsOf: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg")!))?.pngData()
         
         let superHero = givenASuperHeroWithName()
@@ -76,7 +58,7 @@ class SuperHeroesDetailViewControllerTests: AcceptanceTestCase {
         expect(photoImageView?.image?.pngData()).to(equal(image))
     }
     
-    func testDoesNotShowAvengersBadgeIfTheHeroIsNotPartOfTheAvengersTeam() {
+    func test_avengersBadge_giverASuperHero_shouldDoesNotShowAvengersBadge() {
         let superHero = givenASuperHeroWithName(false)
         
         openSuperHeroDetailViewController(superHero.name)
@@ -84,7 +66,7 @@ class SuperHeroesDetailViewControllerTests: AcceptanceTestCase {
         tester().waitForAbsenceOfView(withAccessibilityLabel: "Avengers Badge")
     }
     
-    func testShowsAvengersBadgeIfTheSuperHeroIsPartOfTheAvengersTeam() {
+    func test_avengersBadge_giverASuperHero_shouldShowsAvengersBadge() {
         let superHero = givenASuperHeroWithName(true)
         
         openSuperHeroDetailViewController(superHero.name)

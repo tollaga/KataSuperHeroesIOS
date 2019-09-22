@@ -12,5 +12,6 @@ end
 
 target 'KataSuperHeroesTests' do
   pod 'Nimble'
+  pod 'Fakery'
 end
 

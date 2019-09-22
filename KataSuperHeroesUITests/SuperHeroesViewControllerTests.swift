@@ -14,25 +14,27 @@ import UIKit
 
 class SuperHeroesViewControllerTests: AcceptanceTestCase {
 
-    fileprivate let repository = MockSuperHeroesRepository()
+    fileprivate let repository = InMemorySuperHeroesRepository()
 
-    func testShowsEmptyCaseIfThereAreNoSuperHeroes() {
+    func test_emptyView_givenThereAreNoSuperHeroes_shouldShowsEmptyCase() {
         givenThereAreNoSuperHeroes()
 
         openSuperHeroesViewController()
 
-        tester().waitForView(withAccessibilityLabel: "¯\\_(ツ)_/¯")
+        tester().waitForView(withAccessibilityLabel: "EmptyView")
     }
     
-    func testShowLoading() {
+    func test_loadingView_givenThereAreSomeSuperHeroes_shouldShowsLoading() {
         let numberOfSuperHeroes = 1
         
         _ = givenThereAreSomeSuperHeroes(numberOfSuperHeroes)
         
+        openSuperHeroesViewController()
+        
         tester().waitForView(withAccessibilityLabel: "LoadingView")
     }
     
-    func testHideLoadingViewIfThereAreSomeSuperHeroes() {
+    func test_loadingView_givenThereAreSomeSuperHeroes_shouldHidesLoading() {
         let numberOfSuperHeroes = 1
         
         _ = givenThereAreSomeSuperHeroes(numberOfSuperHeroes)
@@ -42,10 +44,10 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         tester().waitForAbsenceOfView(withAccessibilityLabel: "LoadingView")
     }
     
-    func testShowsSuperHeroesCaseIfThereAreSuperHeroes() {
+    func test_cells_givenThereAreSomeSuperHeroes_shouldShowsSuperHeroesCase() {
         let numberOfSuperHeroes = 10
         
-        givenThereAreSuperHeroes(numberOfSuperHeroes)
+        _ = givenThereAreSuperHeroes(numberOfSuperHeroes)
         
         let viewController = openSuperHeroesViewController()
     
@@ -54,7 +56,7 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         }
     }
     
-    func testShowSuperHeroNameIfThereIsSuperHero() {
+    func test_cellNameLabel_givenThereIsASuperHero_shouldShowsThisSuperHeroName() {
         let numberOfSuperHeroes = 1
         let superHeroName = "SuperHero - 0"
         
@@ -67,7 +69,7 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         expect(cell.nameLabel.text).to(equal(superHeroName))
     }
     
-    func testShowSuperHeroImageIfThereIsSuperHero() {
+    func test_cellPhotoImageView_givenThereIsASuperHero_shouldShowsThisSuperHeroImage() {
         let numberOfSuperHeroes = 1
         let image = try? UIImage(data: Data(contentsOf: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg")!))?.pngData()
         
@@ -80,7 +82,7 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         expect(cell.photoImageView?.image?.pngData()).to(equal(image))
     }
     
-    func testShowSuperHeroBadgeIfThereIsSuperHero() {
+    func test_cellAvengersBadgeImageView_givenThereIsASuperHeroWithAvenger_shouldShowsThisSuperHeroBadge() {
         let numberOfSuperHeroes = 1
         
         _ = givenThereAreSomeSuperHeroes(numberOfSuperHeroes, avengers: true)
@@ -92,7 +94,7 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         expect(cell.avengersBadgeImageView.isHidden).to(beFalse())
     }
     
-    func testHideSuperHeroBadgeIfThereIsSuperHero() {
+    func test_cellAvengersBadgeImageView_givenThereIsASuperHeroWitoutAvenger_shouldHidesThisSuperHeroBadge() {
         let numberOfSuperHeroes = 1
         
         _ = givenThereAreSomeSuperHeroes(numberOfSuperHeroes)
@@ -104,7 +106,7 @@ class SuperHeroesViewControllerTests: AcceptanceTestCase {
         expect(cell.avengersBadgeImageView.isHidden).to(beTrue())
     }
     
-    func testShowSuperHeroDetailIfTapped() {
+    func test_tapRow_givenThereIsASuperHero_shouldRoutesToSuperHeroDetail() {
         let numberOfSuperHeroes = 1
         _ = givenThereAreSomeSuperHeroes(numberOfSuperHeroes)
        

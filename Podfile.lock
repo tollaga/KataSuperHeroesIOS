@@ -1,4 +1,5 @@
 PODS:
+  - Fakery (4.1.1)
   - KIF (3.7.6):
     - KIF/Core (= 3.7.6)
   - KIF/Core (3.7.6)
@@ -8,21 +9,24 @@ PODS:
   - SDWebImage/Core (5.0.2)
 
 DEPENDENCIES:
+  - Fakery
   - KIF
   - Nimble
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Fakery
     - KIF
     - Nimble
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Fakery: d3380c4aa1efe7631c0831d7e26aa9db4491f014
   KIF: ae73fd36b1c860588841cb27e7f6efc4477122e2
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
 
-PODFILE CHECKSUM: 4d938a4076e02d20598a7577cfbe86100c6d8771
+PODFILE CHECKSUM: c11e28bd068165528152a2191646fc47f74a554d
 
 COCOAPODS: 1.6.1

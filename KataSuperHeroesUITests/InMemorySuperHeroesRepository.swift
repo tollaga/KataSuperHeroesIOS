@@ -9,7 +9,7 @@
 import Foundation
 @testable import KataSuperHeroes
 
-class MockSuperHeroesRepository: SuperHeroesRepository {
+class InMemorySuperHeroesRepository: SuperHeroesRepository {
 
     var superHeroes = [SuperHero]()
 

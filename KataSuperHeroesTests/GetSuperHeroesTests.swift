@@ -12,17 +12,17 @@ import Nimble
 
 class GetSuperHeroesTests: XCTestCase {
 
-    fileprivate let repository = MockSuperHeroesRepository()
+    fileprivate let repository = InMemorySuperHeroesRepository()
 
     func test_execute_givenOnlyOneSuperHeroInRepository_shouldReturnTheSameSuperHero() {
-        let superHero = givenASuperHero()
+        let superHero = givenASuperHeroInTheRepository()
         
         GetSuperHeroes(repository: repository).execute { (superHeroes) in
             expect(superHeroes).to(equal([superHero]))
         }
     }
     
-    func test_excute_giveEmptyRepository_shouldReturnEmpty() {
+    func test_execute_giveEmptyRepository_shouldReturnEmpty() {
         givenEmptyRepository()
         
         GetSuperHeroes(repository: repository).execute { (superHeroes) in
@@ -30,10 +30,8 @@ class GetSuperHeroesTests: XCTestCase {
         }
     }
     
-    fileprivate func givenASuperHero() -> SuperHero {
-        let superHero = SuperHero(name: "Mr. Clean",
-                                  photo: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg"),
-                                  isAvenger: false, description: "Description")
+    fileprivate func givenASuperHeroInTheRepository() -> SuperHero {
+        let superHero = SuperHero.random()
         repository.superHeroes = [superHero]
         return superHero
     }
