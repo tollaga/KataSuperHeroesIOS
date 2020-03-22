@@ -1,9 +1,6 @@
 //
-//  AcceptanceTestCase.swift
-//  KataSuperHeroes
-//
-//  Created by Pedro Vicente Gomez on 13/01/16.
-//  Copyright © 2016 GoKarumi. All rights reserved.
+//  Created by Jose Gil <jose.gil@tollaga.com> on 13/03/2020.
+//  Copyright © 2020 Tollaga. All rights reserved.
 //
 
 import Foundation
